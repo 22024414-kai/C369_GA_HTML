@@ -153,7 +153,11 @@
   <footer>
     <p>&copy; 2023 RF Bank. All rights reserved.</p>
   </footer>
+
   <script>
+    // Load registered users from sessionStorage
+    const registeredUsers = JSON.parse(sessionStorage.getItem('registeredUsers')) || [];
+
     // Login function
     function login(event) {
       event.preventDefault();

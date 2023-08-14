@@ -411,7 +411,19 @@
         }
 
         function validateExpiryDate(expiryDate) {
-          return /^\d{2}\/\d{2}$/.test(expiryDate);
+          if (!/^\d{2}\/\d{2}$/.test(expiryDate)) {
+            return false; // Return false if the format is not valid (e.g., "MM/YY")
+          }
+
+          const currentDate = new Date();
+          const currentYear = currentDate.getFullYear() % 100; // Get the last two digits of the current year (e.g., 2023 => 23)
+          const inputYear = parseInt(expiryDate.substr(3, 2), 10); // Extract the last two digits of the input year
+
+          if (inputYear < 23 ) {
+            return false; // Return false if the input year is less than 23 
+          }
+
+          return true; // If all conditions are met, the expiry date is valid
         }
 
         function validateCvv(cvv) {

@@ -208,12 +208,12 @@
                     const selectedSource = document.getElementById("fundSource").value;
                     const senderAccountBalance = parseFloat(sessionStorage.getItem(selectedSource));
 
-                    if (isNaN(senderAccountBalance) || senderAccountBalance < convertedAmount) {
+                    if (isNaN(senderAccountBalance) || senderAccountBalance < amount) {
                         alert(`Insufficient funds in account`);
                         return;
                     }
 
-                    sessionStorage.setItem(selectedSource, (senderAccountBalance - convertedAmount).toFixed(2));
+                    sessionStorage.setItem(selectedSource, (senderAccountBalance - amount).toFixed(2));
 
                     result.innerText = `Converted amount: ${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
                     const conversionInfo = `Converted amount: ${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
