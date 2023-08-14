@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.  
+ I will not copy or allow others to copy my code.  
+ I understand that copying code is considered as plagiarism. 
+  
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C 
+ Date/Time Last modified: 9:17PM 
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Page</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-color: #b8d1ae;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            width: 90%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .back-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Position the Transfer button at the bottom left */
+        .transfer-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        /* Add space between comments box and buttons */
+        .space {
+            margin-bottom: 20px;
+        }
+
+        /* Clearfix for the container */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .space {
+            height: 20px;
+            /* Adjust the height for the desired spacing */
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            /* Allow items to wrap when the width is reduced */
+            justify-content: center;
+            /* Center the items horizontally */
+            padding: 10px;
+            /* Adjust padding for responsiveness */
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            /* Adjusted font size */
+            font-weight: bold;
+            margin: 15px;
+            /* Adjusted margin */
+        }
+
+        footer {
+            position: relative;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <a href="View_transaction.html">View Transactions</a>
+        <a href="Local_transfer.html">Local Transfer</a>
+        <a href="Currency_exchange.html">Currency Exchange</a>
+        <a href="Pay_bills.html">Pay Bills</a>
+        <a href="Additional_info.html">Additional Info</a>
+        <a href="AL_Home.html">Homepage</a>
+        <a href="index.html">Logout</a>
+    </div>
+    <div class="header">
+        <h1>LOCAL TRANSFER</h1>
+    </div>
+
+    <body>
+        <div class="container">
+            <div class="header">
+
+            </div>
+
+            <form id="bankTransferForm">
+                <div class="form-group">
+                    <label for="fromAccount">Transfer From:</label>
+                    <select id="fromAccount" name="fromAccount">
+                        <option value="account1">Account 1</option>
+                        <option value="account2">Account 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipient">Recipient Account/ID:</label>
+                    <p id="recipientInfo"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" min="0.01" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Add Comments:</label>
+                    <textarea id="comments" name="comments" rows="4"></textarea>
+                </div>
+
+                <!-- Add space below the comments box -->
+                <div class="space"></div>
+                <div class="space"></div>
+
+            </form>
+
+            <!-- Back button positioned at the bottom right -->
+            <a href="Local_transfer.html" class="back-button">Back</a>
+
+            <!-- Transfer button positioned at the bottom left -->
+            <button type="submit" class="transfer-button">Transfer</button>
+
+            <!-- Clearfix for the container -->
+            <div class="clearfix"></div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 RF Bank. All rights reserved.</p>
+        </footer>
+
+        <script>
+            // Function to extract URL parameters
+            function getParameterByName(name, url) {
+                name = name.replace(/[\[\]]/g, "\\$&");
+                const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return "";
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            // Retrieve URL parameters
+            const mobileNumber = getParameterByName("mobileNumber", window.location.href);
+            const bankAccount = getParameterByName("bankAccount", window.location.href);
+            const nric = getParameterByName("nric", window.location.href);
+
+            // Display recipient information based on the input from the previous page
+            const recipientInfoElement = document.getElementById("recipientInfo");
+            if (mobileNumber) {
+                recipientInfoElement.textContent = `Mobile Number: ${mobileNumber}`;
+            } else if (bankAccount) {
+                recipientInfoElement.textContent = `Bank Account: ${bankAccount}`;
+            } else if (nric) {
+                recipientInfoElement.textContent = `NRIC: ${nric}`;
+            }
+
+            // Script for the Transfer button
+            const transferButton = document.querySelector('.transfer-button');
+
+            transferButton.addEventListener('click', function () {
+        const selectedAccount = document.getElementById("fromAccount").value;
+        const transferComments = document.getElementById("comments").value;
+        const transferAmount = parseFloat(document.getElementById("amount").value); // Convert to float
+
+        if (isNaN(transferAmount) || transferAmount <= 0) {
+            alert("Please enter a valid amount.");
+            return;
+        }
+
+        // Retrieve sender's account balance from sessionStorage
+        const senderAccountBalance = parseFloat(sessionStorage.getItem(selectedAccount));
+
+        if (isNaN(senderAccountBalance) || senderAccountBalance < transferAmount) {
+            alert("Insufficient Balance");
+            return;
+        }
+
+        // Update sender's balance
+        sessionStorage.setItem(selectedAccount, (senderAccountBalance - transferAmount).toFixed(2));
+
+        // Inform user about successful transfer
+        const recipientInfo = recipientInfoElement.textContent;
+        const transferInfo = `Recipient: ${recipientInfo}\nSource Account: ${selectedAccount}\nComments: ${transferComments}\nAmount: $${transferAmount.toFixed(2)}`;
+
+        alert(`Transfer successful!\n${transferInfo}`);
+
+        // Redirect back to the homepage
+        window.location.href = 'AL_Home.html';
+    });
+</script>
+    </body>
+
+</html>

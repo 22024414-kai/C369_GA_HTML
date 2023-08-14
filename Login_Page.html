@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.  
+ I will not copy or allow others to copy my code.  
+ I understand that copying code is considered as plagiarism. 
+  
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C 
+ Date/Time Last modified: 9:17PM 
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <!-- Add Font Awesome CSS link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #b8d1ae;
+      font-family: 'Times New Roman', Times, serif, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px;
+      font-family: "Times New Roman", serif;
+      text-decoration: underline;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 5px auto;
+      flex-direction: row;
+    }
+
+
+    .login-container,
+    .singpass-container {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      flex: 1;
+
+    }
+
+    .icon-image {
+      font-size: 100px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 200px;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .singpass-container img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 10px;
+    }
+
+    footer {
+      position: relative;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media screen and (max-width: 768px) {
+      .container {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>LOGIN PAGE</h1>
+  </div>
+
+  <div class="container">
+    <div class="login-container">
+      <i class="fas fa-user icon-image"></i>
+      <form onsubmit="login(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required style="width: 100%;">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required style="width: 100%;">
+        <button type="submit">Login</button>
+      </form>
+
+      <!-- Register button to toggle registration form -->
+
+      <button id="registerButton" onclick="toggleRegistrationForm()">Register</button>
+      <form id="registrationForm" onsubmit="register(event)" style="display: none;">
+        <div style="margin-top: 10px;"></div> <!-- Add a space here -->
+        <label for="newUsername">Username:</label>
+        <input type="text" id="newUsername" required style="width: 100%;">
+        <label for="newPassword">Password:</label>
+        <input type="password" id="newPassword" required style="width: 100%;">
+        <label for="emailOrMobile">Mobile Number/Email:</label>
+        <input type="text" id="emailOrMobile" required style="width: 100%;">
+        <button type="submit">Register</button>
+      </form>
+    </div>
+
+    <!-- Singpass container on the right -->
+    <div class="singpass-container">
+      <a href="AL_Home.html" target="_blank">
+        <img src="C:\Users\22024414\Downloads\RP Y2S1 Mods\C369 - Fin Tech\C369_GA_HTML\photo_6213114040335578966_y.jpg" alt="SingPass Image">
+      </a>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2023 RF Bank. All rights reserved.</p>
+  </footer>
+  <script>
+    // Login function
+    function login(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Check if the provided credentials match the registered user
+      const registeredUserData = JSON.parse(sessionStorage.getItem('userData'));
+      if (registeredUserData && username === registeredUserData.username && password === registeredUserData.password) {
+        alert('Login successful!');
+        window.location.href = 'AL_Home.html';
+      } else {
+        alert('Invalid username or password. Please try again.');
+      }
+    }
+
+    // Toggle the registration form's visibility
+    function toggleRegistrationForm() {
+      const registrationForm = document.getElementById('registrationForm');
+      registrationForm.style.display = registrationForm.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Registration function using session storage
+    function register(event) {
+      event.preventDefault();
+
+      const newUsername = document.getElementById('newUsername').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const emailOrMobile = document.getElementById('emailOrMobile').value;
+
+      // Check if the username is already taken
+      const existingUserData = JSON.parse(sessionStorage.getItem('userData'));
+      if (existingUserData && existingUserData.username === newUsername) {
+        alert('Username unavailable. Please choose a different username.');
+        return;
+      }
+
+      // Check if the email/mobile is already registered
+      const registeredUsers = JSON.parse(sessionStorage.getItem('registeredUsers')) || [];
+      const duplicateUser = registeredUsers.find(user => user.contact === emailOrMobile);
+      if (duplicateUser) {
+        alert('Email or phone number is already registered. Please use a different one.');
+        return;
+      }
+
+      // Check if the email/mobile and password meet requirements
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phonePattern = /^[0-9]{8}$/;
+
+      if (!emailPattern.test(emailOrMobile) && !phonePattern.test(emailOrMobile)) {
+        alert('Please enter a valid email or 8-digit phone number.');
+        return;
+      }
+
+      if (newPassword.length < 8) {
+        alert('Password must be at least 8 characters long.');
+        return;
+      }
+
+      const userData = {
+        username: newUsername,
+        password: newPassword,
+        contact: emailOrMobile,
+      };
+
+      // Store the user data in session storage
+      registeredUsers.push(userData);
+      sessionStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+      alert('Registration successful! You are now registered and logged in.');
+
+      // Update userData in session storage after successful registration
+      const registeredUser = registeredUsers.find(user => user.username === newUsername && user.password === newPassword);
+      if (registeredUser) {
+        sessionStorage.setItem('userData', JSON.stringify(registeredUser));
+      }
+
+      // Perform automatic login after registration
+      if (registeredUser) {
+        alert('Automatic login successful!');
+        window.location.href = 'AL_Home.html';
+      } else {
+        alert('Automatic login failed. Please log in manually.');
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.  
+ I will not copy or allow others to copy my code.  
+ I understand that copying code is considered as plagiarism. 
+  
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C 
+ Date/Time Last modified: 9:17PM 
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Information</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-color: #b8d1ae;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            font-size: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .info-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .info-box h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .info-box button {
+            display: block;
+            margin-top: 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+
+        }
+
+        .info-box a {
+            text-decoration: none;
+        }
+
+        .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;flex-wrap: wrap; /* Allow items to wrap when the width is reduced */
+      justify-content: center; /* Center the items horizontally */
+      padding: 10px; /* Adjust padding for responsiveness */
+    }
+
+    .navigation a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      /* Adjusted font size */
+      font-weight: bold;
+      margin: 15px;
+      /* Adjusted margin */
+    }
+    footer {
+            position: relative;
+            text-align: center;
+            padding: 10px;
+        }
+         /* Responsive adjustments for smaller screens */
+         @media screen and (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <a href="View_transaction.html">View Transactions</a>
+        <a href="Local_transfer.html">Local Transfer</a>
+        <a href="Currency_exchange.html">Currency Exchange</a>
+        <a href="Pay_bills.html">Pay Bills</a>
+        <a href="Additional_info.html">Additional Info</a>
+        <a href="AL_Home.html">Homepage</a>
+        <a href="index.html">Logout</a>
+    </div>
+    <div class="header">
+        <h1>ADDITIONAL INFORMATION</h1>
+      </div>
+    <body>
+        <div class="container">
+            <div class="info-box">
+                <h2>View Previous Transactions</h2>
+                <p>View details from transactions made previously.</p>
+                <a href="View_transaction.html"><button>Go to Transactions</button></a>
+            </div>
+            <div class="info-box">
+                <h2>Local Transfer</h2>
+                <p>Transfer money locally to people in the same country.</p>
+                <a href="Local_transfer.html"><button>Local Transfer</button></a>
+            </div>
+            <div class="info-box">
+                <h2>Exchange Currency</h2>
+                <p>Choose from a range of different currencies to be exchanged with.</p>
+                <a href="Currency_exchange.html"><button>Exchange Currencies</button></a>
+            </div>
+            <div class="info-box">
+                <h2>Pay Bills</h2>
+                <p>Pay for any bills incurred to various different organisations.</p>
+                <a href="Pay_bills.html"><button>Pay Bills</button></a>
+            </div>
+        </div>
+         
+        <footer>
+            <p>&copy; 2023 RF Bank. All rights reserved.</p>
+          </footer>
+        
+    </body>
+
+</html>

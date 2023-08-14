@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.
+ I will not copy or allow others to copy my code.
+ I understand that copying code is considered as plagiarism.
+
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C
+ Date/Time Last modified: 9:17PM
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Transfer</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-color: #b8d1ae;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            /* Increased padding */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            font-family: "Times New Roman", serif;
+            font-size: 30px;
+            /* Increased font size */
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            /* Increased margin-bottom */
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 18px;
+            /* Increased font size */
+            margin-bottom: 10px;
+            /* Increased margin-bottom */
+        }
+
+        input {
+            width: 90%;
+            padding: 15px;
+            /* Increased padding */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            /* Increased font size */
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            /* Increased padding */
+            font-size: 18px;
+            /* Increased font size */
+            cursor: pointer;
+        }
+
+        .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;flex-wrap: wrap; /* Allow items to wrap when the width is reduced */
+      justify-content: center; /* Center the items horizontally */
+      padding: 10px; /* Adjust padding for responsiveness */
+    }
+
+    .navigation a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      /* Adjusted font size */
+      font-weight: bold;
+      margin: 15px;
+      /* Adjusted margin */
+    }
+    footer {
+            position: relative;
+            text-align: center;
+            padding: 10px;
+        }
+         /* Responsive adjustments for smaller screens */
+         @media screen and (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <a href="View_transaction.html">View Transactions</a>
+        <a href="Local_transfer.html">Local Transfer</a>
+        <a href="Currency_exchange.html">Currency Exchange</a>
+        <a href="Pay_bills.html">Pay Bills</a>
+        <a href="Additional_info.html">Additional Info</a>
+        <a href="AL_Home.html">Homepage</a>
+        <a href="index.html">Logout</a>
+    </div>
+    <h1 class="header">LOCAL TRANSFER</h1>
+
+    <body>
+        <div class="container">
+
+            <form>
+                <div class="form-group">
+                    <label for="mobileNumber">Transfer to Mobile Number:</label>
+                    <input type="text" id="mobileNumber" name="mobileNumber" placeholder="Enter mobile number">
+                </div>
+                <div class="form-group">
+                    <label for="bankAccount">Transfer to Bank Account:</label>
+                    <input type="text" id="bankAccount" name="bankAccount" placeholder="Enter bank account">
+                </div>
+                <div class="form-group">
+                    <label for="nric">Transfer to NRIC:</label>
+                    <input type="text" id="nric" name="nric" placeholder="Enter NRIC">
+                </div>
+                <button type="button" id="continueButton">Continue</button>
+            </form>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 RF Bank. All rights reserved.</p>
+          </footer>
+        
+        <script>
+            document.getElementById("continueButton").addEventListener("click", function () {
+                const mobileNumber = document.getElementById("mobileNumber").value;
+                const bankAccount = document.getElementById("bankAccount").value;
+                const nric = document.getElementById("nric").value;
+        
+                // Validate input fields
+                let validInput = false;
+        
+                if (mobileNumber && /^\d{8}$/.test(mobileNumber)) {
+                    alert("Mobile number is valid.");
+                    validInput = true;
+                } else if (mobileNumber) {
+                    alert("Please enter a valid mobile number.");
+                    return;
+                }
+        
+                if (bankAccount && /^\d{7,15}$/.test(bankAccount)) {
+                    alert("Bank account is valid.");
+                    validInput = true;
+                } else if (bankAccount) {
+                    alert("Please enter a valid bank account.");
+                    return;
+                }
+        
+                if (nric && /^[A-Za-z0-9]{9}$/.test(nric)) {
+                    alert("NRIC is valid.");
+                    validInput = true;
+                } else if (nric) {
+                    alert("Please enter a valid NRIC.");
+                    return;
+                }
+        
+                if (validInput) {
+                    // Construct the URL with parameters
+                    const url = `payment_page.html?mobileNumber=${encodeURIComponent(mobileNumber)}&bankAccount=${encodeURIComponent(bankAccount)}&nric=${encodeURIComponent(nric)}`;
+        
+                    // Redirect to payment_page.html with parameters
+                    window.location.href = url;
+                } else {
+                    alert("Please enter at one input.");
+                }
+            });
+        </script>
+    </body>
+
+</html>

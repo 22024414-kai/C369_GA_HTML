@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.  
+ I will not copy or allow others to copy my code.  
+ I understand that copying code is considered as plagiarism. 
+  
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C 
+ Date/Time Last modified: 9:17PM 
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-color: #b8d1ae;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .header {
+            font-family: "Times New Roman", serif;
+            font-size: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 90%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            /* Allow items to wrap when the width is reduced */
+            justify-content: center;
+            /* Center the items horizontally */
+            padding: 10px;
+            /* Adjust padding for responsiveness */
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            /* Adjusted font size */
+            font-weight: bold;
+            margin: 15px;
+            /* Adjusted margin */
+        }
+
+        footer {
+            position: relative;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <a href="View_transaction.html">View Transactions</a>
+        <a href="Local_transfer.html">Local Transfer</a>
+        <a href="Currency_exchange.html">Currency Exchange</a>
+        <a href="Pay_bills.html">Pay Bills</a>
+        <a href="Additional_info.html">Additional Info</a>
+        <a href="AL_Home.html">Homepage</a>
+        <a href="index.html">Logout</a>
+    </div>
+    <h1 class="header">CURRENCY EXCHANGE</h1>
+    <div class="container">
+        <div class="form-group">
+            <label for="fundSource">Select Fund Source:</label>
+            <select id="fundSource" name="fundSource">
+                <option value="account1">Account 1</option>
+                <option value="account2">Account 2</option>
+            </select>
+        </div>
+        <form id="exchange-form">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" id="amount" name="amount" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label for="fromCurrency">From Currency:</label>
+                <select id="fromCurrency" name="fromCurrency">
+                    <option value="SGD">SGD - Singapore Dollar</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="toCurrency">To Currency:</label>
+                <select id="toCurrency" name="toCurrency">
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="HKD">HKD - Hong Kong Dollar</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="MYR">MYR - Malaysian Ringgit</option>
+                    <option value="THB">THB - Thai Baht</option>
+                    <option value="USD">USD - US Dollar</option>
+                </select>
+            </div>
+            <button type="button" id="convertButton">Convert</button>
+            <p id="result"></p>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 RF Bank. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const convertButton = document.getElementById("convertButton");
+            const result = document.getElementById("result");
+
+            // Define exchange rates 
+            const exchangeRates = {
+                AUD: { SGD: 1.00, USD: 0.76, EUR: 0.62, JPY: 80.02, MYR: 3.21, THB: 27.81, GBP: 0.53, HKD: 5.67, CNY: 4.73 },
+                CNY: { SGD: 0.21, USD: 0.16, EUR: 0.13, JPY: 5.93, MYR: 0.97, THB: 7.06, GBP: 0.11, HKD: 1.14, AUD: 0.21 },
+                EUR: { SGD: 1.62, USD: 1.18, JPY: 131.72, MYR: 4.88, THB: 39.95, GBP: 0.85, HKD: 9.16, CNY: 7.96, AUD: 1.61 },
+                GBP: { SGD: 1.84, USD: 1.37, EUR: 1.17, JPY: 155.25, MYR: 6.84, THB: 45.20, HKD: 10.24, CNY: 9.04, AUD: 1.88 },
+                HKD: { SGD: 0.17, USD: 0.13, EUR: 0.11, JPY: 12.01, MYR: 0.60, THB: 3.89, GBP: 0.098, CNY: 0.88, AUD: 0.18 },
+                JPY: { SGD: 0.012, USD: 0.0091, EUR: 0.0076, MYR: 0.031, THB: 0.25, GBP: 0.0064, HKD: 0.13, CNY: 0.17, AUD: 0.013 },
+                MYR: { SGD: 0.32, USD: 0.23, EUR: 0.20, JPY: 31.98, THB: 7.19, GBP: 0.15, HKD: 1.68, CNY: 1.03, AUD: 0.31 },
+                SGD: { USD: 0.73, EUR: 0.62, JPY: 80.89, MYR: 3.10, THB: 22.20, GBP: 0.54, HKD: 5.94, CNY: 4.80, AUD: 1.00 },
+                THB: { SGD: 0.045, USD: 0.031, EUR: 0.025, JPY: 4.03, MYR: 0.14, GBP: 0.022, HKD: 0.26, CNY: 0.14, AUD: 0.036 },
+                USD: { SGD: 1.37, EUR: 0.85, JPY: 109.64, MYR: 4.27, THB: 32.12, GBP: 0.73, HKD: 7.77, CNY: 6.35, AUD: 1.31 },
+            };
+
+
+            convertButton.addEventListener("click", function () {
+                const amount = parseFloat(document.getElementById("amount").value);
+                const fromCurrency = document.getElementById("fromCurrency").value;
+                const toCurrency = document.getElementById("toCurrency").value;
+
+                if (exchangeRates[fromCurrency] && exchangeRates[fromCurrency][toCurrency]) {
+                    const convertedAmount = amount * exchangeRates[fromCurrency][toCurrency];
+
+                    // Perform deduction from the selected source account
+                    const selectedSource = document.getElementById("fundSource").value;
+                    const senderAccountBalance = parseFloat(sessionStorage.getItem(selectedSource));
+
+                    if (isNaN(senderAccountBalance) || senderAccountBalance < convertedAmount) {
+                        alert(`Insufficient funds in account`);
+                        return;
+                    }
+
+                    sessionStorage.setItem(selectedSource, (senderAccountBalance - convertedAmount).toFixed(2));
+
+                    result.innerText = `Converted amount: ${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+                    const conversionInfo = `Converted amount: ${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+                    alert(`Currency conversion successful.\n${conversionInfo}\nSource Account: ${selectedSource}`);
+                } else {
+                    result.style.fontFamily = "'Times New Roman', Times, serif";
+                    result.innerText = "Please convert to another currency.";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

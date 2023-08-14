@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.  
+ I will not copy or allow others to copy my code.  
+ I understand that copying code is considered as plagiarism. 
+  
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C 
+ Date/Time Last modified: 9:17PM 
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Previous Transactions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-color: #b8d1ae;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: "Times New Roman", serif;
+            text-decoration: underline;
+        }
+
+        .account-info {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .account-info h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .account-info p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .account-table {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .account-cell:last-child {
+            border-right: none;
+        }
+
+        .account-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-top: 1px solid #ccc;
+            margin: 5px 0;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            /* Allow items to wrap when the width is reduced */
+            justify-content: center;
+            /* Center the items horizontally */
+            padding: 10px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            /* Adjusted font size */
+            font-weight: bold;
+            margin: 15px;
+            /* Adjusted margin */
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            height: 500px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <a href="View_transaction.html">View Transactions</a>
+        <a href="Local_transfer.html">Local Transfer</a>
+        <a href="Currency_exchange.html">Currency Exchange</a>
+        <a href="Pay_bills.html">Pay Bills</a>
+        <a href="Additional_info.html">Additional Info</a>
+        <a href="AL_Home.html">Homepage</a>
+        <a href="index.html">Logout</a>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>VIEW PREVIOUS TRANSACTIONS</h1>
+        </div>
+        <div class="account-info">
+            <div class="account-table">
+                <div class="account-cell">
+                    <p><strong>Account</strong></p>
+                    <p><select name="Deposit Accounts" accType="Different Accounts">
+                            <option value="">Account</option>
+                            <option value="Acc1">Account 1</option>
+                            <option value="Acc2">Account 2</option>
+                        </select></p>
+                    <p><select name="Time Range" timeRange="Months">
+                            <option value="">Time Range</option>
+                            <option value="august">August</option>
+                            <option value="july">July</option>
+                            <option value="june">June</option>
+                            <option value="may">May</option>
+                        </select></p>
+
+                </div>
+                <div class="account-cell">
+                    <p><strong>Transaction Type</strong></p>
+                    <p><select name="Transaction Type" tranType="Transaction Types">
+                            <option value="">Transaction Type</option>
+                            <option value="Local">Local</option>
+                            <option value="billPayment">Bill Payment</option>
+                        </select></p>
+                    <p><select name="Time Range" timeRange="Months">
+                            <option value="">Time Range</option>
+                            <option value="august">August</option>
+                            <option value="july">July</option>
+                            <option value="june">June</option>
+                            <option value="may">May</option>
+                        </select></p>
+                    <button onclick="displayTransactions()">Display Transactions</button>
+
+                    <div class="popup-container">
+                        <h2>Transaction History</h2>
+                        <div id="transactionData"></div>
+                        <button onclick="closePopup()">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="account-line"></div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 RF Bank. All rights reserved.</p>
+        </footer>
+
+        <script>
+            function openPopup() {
+                var popupContainer = document.querySelector(".popup-container");
+                popupContainer.style.display = "block";
+            }
+
+            function closePopup() {
+                var popupContainer = document.querySelector(".popup-container");
+                popupContainer.style.display = "none";
+            }
+
+            function displayTransactions() {
+                var transactionDataContainer = document.getElementById("transactionData");
+                var transactions = [
+                    { date: "2023-08-10", description: "Payment for groceries", amount: "$50.00" },
+                    { date: "2023-08-09", description: "Local transfer to friend", amount: "$100.00" },
+                    { date: "2023-08-08", description: "Bill payment for utilities", amount: "$75.00" }
+                ];
+                transactionDataContainer.innerHTML = "";
+                for (var i = 0; i < transactions.length; i++) {
+                    var transactionLine = document.createElement("div");
+                    transactionLine.innerHTML = `
+                        <p><strong>Date:</strong> ${transactions[i].date}</p>
+                        <p><strong>Description:</strong> ${transactions[i].description}</p>
+                        <p><strong>Amount:</strong> ${transactions[i].amount}</p>
+                        <hr>
+                    `;
+                    transactionDataContainer.appendChild(transactionLine);
+                }
+                openPopup();
+            }
+        </script>
+    </div>
+</body>
+</html>

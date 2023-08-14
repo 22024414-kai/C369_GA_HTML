@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.  
+ I will not copy or allow others to copy my code.  
+ I understand that copying code is considered as plagiarism. 
+  
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C 
+ Date/Time Last modified: 9:17PM 
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>After Login Homepage</title>
+  <!-- Add Font Awesome CSS link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif, sans-serif;
+      background-color: #b8d1ae;
+      /* Set the background color to sage green */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex: 1;
+      min-height: calc(100vh - 130px);
+      /* Adjust as needed to prevent overlap with footer */
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      text-align: center;
+      text-decoration: underline;
+    }
+
+    .account-info {
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .account-info h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .account-info p {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .services {
+      font-family: 'Times New Roman', Times, serif;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .service-card {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      text-decoration: none;
+      /* Remove underline from links */
+    }
+
+    .service-icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    /* Additional styles for account table */
+    .account-table {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .account-cell {
+      border-right: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .account-cell:last-child {
+      border-right: none;
+    }
+
+    /* New style for the horizontal line */
+    .account-line {
+      width: 100%;
+      border-top: 1px solid #ccc;
+      margin: 10px 0;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
+      /* ... (Rest of the responsive styles remain the same) ... */
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      /* Allow items to wrap when the width is reduced */
+      justify-content: center;
+      /* Center the items horizontally */
+      padding: 10px;
+      /* Adjust padding for responsiveness */
+    }
+
+    .navigation a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 15px;
+    }
+
+    footer {
+      position: relative;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media screen and (max-width: 768px) {
+      .container {
+        padding: 30px;
+      }
+    }
+
+    .popup-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 600px;
+      max-width: 90%;
+      height: auto;
+      overflow: auto;
+    }
+
+    .popup-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .add-card {
+      max-width: 400px;
+      padding: 20px;
+      box-sizing: border-box;
+      /* Include padding and border in the width */
+    }
+
+    .add-card label,
+    .add-card input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .card-details-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navigation">
+    <a href="View_transaction.html">View Transactions</a>
+    <a href="Local_transfer.html">Local Transfer</a>
+    <a href="Currency_exchange.html">Currency Exchange</a>
+    <a href="Pay_bills.html">Pay Bills</a>
+    <a href="Additional_info.html">Additional Info</a>
+    <a href="AL_Home.html">Homepage</a>
+    <a href="index.html">Logout</a>
+  </div>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 class="header">HOMEPAGE</h1>
+      </div>
+
+      <div class="services">
+        <a href="View_transaction.html" class="service-card">
+          <i class="fas fa-history service-icon"></i>
+          <h3>View Transactions</h3>
+        </a>
+        <a href="Local_transfer.html" class="service-card">
+          <i class="fas fa-money-bill-wave service-icon"></i>
+          <h3>Local Transfer</h3>
+        </a>
+        <a href="Currency_exchange.html" class="service-card">
+          <i class="fas fa-globe service-icon"></i>
+          <h3>Currency Exchange</h3>
+        </a>
+        <a href="Pay_bills.html" class="service-card">
+          <i class="fas fa-money-check-alt service-icon"></i>
+          <h3>Pay Bills</h3>
+        </a>
+        <a href="Additional_info.html" class="service-card">
+          <i class="fas fa-info-circle service-icon"></i>
+          <h3>Additional Info</h3>
+        </a>
+        <a href="index.html" class="service-card">
+          <i class="fas fa-sign-out-alt service-icon"></i>
+          <h3>Logout</h3>
+        </a>
+      </div>
+
+      <div class="card-details-container" style="display: none;">
+        <div class="card-details">
+          <h3>Account Details:</h3>
+          <p id="displayCardName"></p>
+          <p id="displayCardNumber"></p>
+        </div>
+      </div>
+      <div class="account-info">
+        <div class="account-table">
+          <div class="account-cell">
+            <p><strong>Accounts</strong></p>
+            <p>Account 1:</p>
+            <p>Account 2:</p>
+          </div>
+          <div class="account-cell">
+            <p><strong>Deposits</strong></p>
+            <p id="account1" data-initial-balance="0">$0.00</p>
+            <p id="account2" data-initial-balance="0">$0.00</p>
+          </div>
+        </div>
+        <div class="account-line"></div>
+
+        <div class="add-funds">
+          <h2>Add Funds</h2>
+          <select id="accountSelector">
+            <option value="account1">Account 1</option>
+            <option value="account2">Account 2</option>
+          </select>
+          <input type="number" id="fundsAmount" step="0.01" placeholder="Enter amount" required>
+          <button id="addFundsButton">Add Funds</button>
+
+          <button id="openCardPopupButton" onclick="openCardPopup()">Add Credit/Debit Card</button>
+        </div>
+      </div>
+
+      <!-- Card popup container -->
+      <div id="cardPopupContainer" class="popup-container">
+        <div class="popup-content">
+          <span class="close" onclick="closeCardPopup()">&times;</span>
+          <div class="add-card">
+            <h2>Add Credit/Debit Card</h2>
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" placeholder="Enter card number" required>
+            <label for="cardName">Cardholder Name:</label>
+            <input type="text" id="cardName" placeholder="Enter cardholder name" required>
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" placeholder="MM/YY" required>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="Enter CVV" required>
+            <div class="button-container">
+              <button id="addCardButton" onclick="addCard()">Add Card</button>
+              <button id="closeCardPopupButton" onclick="closeCardPopup()">Close</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <footer>
+        <p>&copy; 2023 RF Bank. All rights reserved.</p>
+      </footer>
+
+      <script>
+        // Store data in session storage
+        function storeData(key, value) {
+          sessionStorage.setItem(key, value);
+        }
+
+        // Retrieve data from session storage
+        function retrieveData(key) {
+          const data = sessionStorage.getItem(key);
+          return data ? parseFloat(data) : null;
+        }
+
+        // Retrieve data from session storage and update the page
+        const account1Value = retrieveData('account1');
+        const account2Value = retrieveData('account2');
+
+        const account1Element = document.getElementById('account1');
+        const account2Element = document.getElementById('account2');
+
+        if (account1Element) {
+          account1Element.textContent = account1Value ? `$${account1Value.toFixed(2)}` : '$0.00';
+        }
+
+        if (account2Element) {
+          account2Element.textContent = account2Value ? `$${account2Value.toFixed(2)}` : '$0.00';
+        }
+
+        // Add funds button click event
+        const addFundsButton = document.getElementById('addFundsButton');
+        addFundsButton.addEventListener('click', function () {
+          const cardAdded = sessionStorage.getItem('cardAdded');
+          if (!cardAdded) {
+            alert('Please add a valid card before trying to add funds.');
+            return;
+          }
+
+          const selectedAccount = document.getElementById('accountSelector').value;
+          const fundsAmount = parseFloat(document.getElementById('fundsAmount').value);
+
+          if (!isNaN(fundsAmount) && fundsAmount > 0) {
+            const currentAmount = retrieveData(selectedAccount) || 0;
+            const newAmount = currentAmount + fundsAmount;
+            storeData(selectedAccount, newAmount.toFixed(2));
+
+            if (selectedAccount === 'account1') {
+              account1Element.textContent = `$${newAmount.toFixed(2)}`;
+            } else if (selectedAccount === 'account2') {
+              account2Element.textContent = `$${newAmount.toFixed(2)}`;
+            }
+
+            alert(`Funds added successfully to ${selectedAccount}!`);
+          } else {
+            alert('Please enter a valid amount to add funds.');
+          }
+        });
+
+        // Functions for card popup
+        // Store card popup state in session storage when it's opened or closed
+        function updateCardPopupState(state) {
+          sessionStorage.setItem('cardPopupState', state);
+        }
+
+        // Check if card popup was previously opened
+        const cardPopupState = sessionStorage.getItem('cardPopupState');
+        if (cardPopupState === 'open') {
+          openCardPopup();
+        }
+
+        // Check if card details were previously added
+        const savedCardDetails = sessionStorage.getItem('cardDetails');
+        if (savedCardDetails) {
+          const cardDetails = JSON.parse(savedCardDetails);
+          // Display card details
+          document.getElementById("displayCardNumber").textContent = `Card Number: ${cardDetails.cardNumber}`;
+          document.getElementById("displayCardName").textContent = `Cardholder Name: ${cardDetails.cardName}`;
+          document.querySelector(".card-details-container").style.display = "block";
+        }
+
+        function openCardPopup() {
+          var cardPopupContainer = document.getElementById("cardPopupContainer");
+          cardPopupContainer.style.display = "block";
+        }
+
+        function closeCardPopup() {
+          var cardPopupContainer = document.getElementById("cardPopupContainer");
+          cardPopupContainer.style.display = "none";
+          // Update card popup state to 'closed' when closed
+          updateCardPopupState('closed');
+        }
+
+        function validateCardNumber(cardNumber) {
+          return /^\d{10,19}$/.test(cardNumber);
+        }
+
+        function validateCardholderName(cardName) {
+          return /^[A-Za-z\s]+$/.test(cardName);
+        }
+
+        function validateExpiryDate(expiryDate) {
+          return /^\d{2}\/\d{2}$/.test(expiryDate);
+        }
+
+        function validateCvv(cvv) {
+          return /^\d{3}$/.test(cvv);
+        }
+        function formatCardNumber(cardNumber) {
+          const lastFourDigits = cardNumber.slice(-4);
+          return `**** **** **** ${lastFourDigits}`;
+        }
+
+        function addCard() {
+          var cardNumber = document.getElementById("cardNumber").value;
+          var cardName = document.getElementById("cardName").value.toUpperCase();
+          var expiryDate = document.getElementById("expiryDate").value;
+          var cvv = document.getElementById("cvv").value;
+
+          if (
+            validateCardNumber(cardNumber) &&
+            validateCardholderName(cardName) &&
+            validateExpiryDate(expiryDate) &&
+            validateCvv(cvv)
+          ) {
+            // Perform necessary actions to add the card details
+            sessionStorage.setItem('cardAdded', 'true');
+            // Display card details
+            document.getElementById("displayCardNumber").textContent = `Card Number:  ${formatCardNumber(cardNumber)}`;
+            document.getElementById("displayCardName").textContent = `Cardholder Name: ${cardName}`;
+            document.querySelector(".card-details-container").style.display = "block";
+
+            alert("Card added successfully!");
+            closeCardPopup();
+          } else {
+            alert("Please fill in all the card details correctly.");
+          }
+        }
+
+        // Handle "Enter" key press event in card popup
+        const cardInputs = document.querySelectorAll(".add-card input");
+        cardInputs.forEach(input => {
+          input.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              addCard();
+            }
+            const cardNumber = document.getElementById("cardNumber").value;
+            const cardName = document.getElementById("cardName").value;
+            const expiryDate = document.getElementById("expiryDate").value;
+            const cvv = document.getElementById("cvv").value;
+            const addFundsButton = document.getElementById('addFundsButton');
+
+            if (
+              validateCardNumber(cardNumber) &&
+              validateCardholderName(cardName) &&
+              validateExpiryDate(expiryDate) &&
+              validateCvv(cvv)
+            ) {
+              addFundsButton.removeAttribute("disabled");
+            } else {
+              addFundsButton.setAttribute("disabled", "true");
+            }
+          });
+        });
+
+
+      </script>
+  </body>
+
+</html>

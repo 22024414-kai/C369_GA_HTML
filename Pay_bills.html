@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--I declare that this code was written by me.  
+ I will not copy or allow others to copy my code.  
+ I understand that copying code is considered as plagiarism. 
+  
+ Student Name:Lee Kai Yu
+ Student ID: 22024414
+ Class: E63C 
+ Date/Time Last modified: 9:17PM 
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Payment</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-color: #b8d1ae;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            max-height: 550px;
+        }
+
+        .header {
+            font-family: "Times New Roman", serif;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 40px;
+
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 24px;
+            font-family: "Times New Roman", serif;
+            margin-bottom: 15px;
+
+        }
+
+        input {
+            width: 70%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+
+        select {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            width: 50%;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            /* Allow items to wrap when the width is reduced */
+            justify-content: center;
+            /* Center the items horizontally */
+            padding: 10px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            /* Adjusted font size */
+            font-weight: bold;
+            margin: 15px;
+            /* Adjusted margin */
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        footer {
+            position: relative;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <a href="View_transaction.html">View Transactions</a>
+        <a href="Local_transfer.html">Local Transfer</a>
+        <a href="Currency_exchange.html">Currency Exchange</a>
+        <a href="Pay_bills.html">Pay Bills</a>
+        <a href="Additional_info.html">Additional Info</a>
+        <a href="AL_Home.html">Homepage</a>
+        <a href="index.html">Logout</a>
+    </div>
+
+    <h1 class="header">PAYMENT FOR BILLS</h1>
+
+    <div class="container">
+
+        <form>
+            <div class="form-group">
+                <label for="billerDetail">Enter Biller's Details:</label>
+                <input type="text" id="billerDetail" name="billerDetail" placeholder="Enter the Billing Organisation">
+            </div>
+            <div class="form-group">
+                <input type="text" id="billRefNum" name="billRefNum" placeholder="Enter Bill Reference Number Here">
+            </div>
+            <div class="form-group">
+                <label for="fundSource">Select Fund Source:</label>
+                <select id="fundSource" name="fundSource">
+                    <option value="account1">Account 1</option>
+                    <option value="account2">Account 2</option>
+                </select>
+                <div class="form-group">
+                    <label for="paymentAmount">Enter Payment Amount:</label>
+                    <input type="number" id="paymentAmount" name="paymentAmount" min="0.01" step="0.01" required>
+                </div>
+
+                <button type="button" id="continue">Continue</button>
+        </form>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2023 RF Bank. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const continueButton = document.getElementById('continue');
+
+            continueButton.addEventListener('click', function () {
+                const billerDetail = document.getElementById('billerDetail').value;
+                const billRefNum = document.getElementById('billRefNum').value;
+                const selectedSource = document.getElementById('fundSource').value;
+                const paymentAmount = parseFloat(document.getElementById('paymentAmount').value);
+
+                if (billerDetail.trim() === "" || billRefNum.trim() === "" || isNaN(paymentAmount) || paymentAmount <= 0) {
+                    alert("Please fill in all required fields and enter a valid payment amount.");
+                    return;
+                }
+
+                const senderAccountBalance = parseFloat(sessionStorage.getItem(selectedSource));
+
+                if (isNaN(senderAccountBalance) || senderAccountBalance < paymentAmount) {
+                    alert("Insufficient Balance");
+                    return;
+                }
+
+                // Update the source account's balance in sessionStorage
+                sessionStorage.setItem(selectedSource, (senderAccountBalance - paymentAmount).toFixed(2));
+
+                // Inform user about successful payment
+                const paymentInfo = `Biller's Details: ${billerDetail}\nBill Reference Number: ${billRefNum}\nSource Account: ${selectedSource}\nPayment Amount: $${paymentAmount.toFixed(2)}`;
+                alert(`Payment successful.\n${paymentInfo}`);
+
+                // Redirect back home
+                window.location.href = 'AL_Home.html';
+            });
+        });
+    </script>
+
+</body>
+
+</html>
